@@ -1,14 +1,10 @@
-
-
-
 function App() {
-
-  console.log(import.meta.env.VITE_APPWRITE_URL)
+  console.log(import.meta.env.VITE_APPWRITE_URL);
   return (
     <>
-  <h1>hi</h1>
+      <h1>hi</h1>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
