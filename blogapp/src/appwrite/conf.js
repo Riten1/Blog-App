@@ -1,4 +1,4 @@
-import { Client, Databases, Storage, ID } from "appwrite";
+import { Client, Databases, Storage, Query } from "appwrite";
 import config from "../envConfig/config";
 
 export class Service{
@@ -54,6 +54,16 @@ export class Service{
   async getPost(slug){
     try {
       return await this.databases.getDocument(config.appwriteDbId, config.appwriteCollectionId, slug)
+       
+    }
+    catch (error) {
+      throw error
+    }
+  }
+
+  async getPosts(queries = [Query.equal('status', 'active')]){
+    try {
+      return await this.databases.getDocument(config.appwriteDbId, config.appwriteCollectionId, queries)
        
     }
     catch (error) {
