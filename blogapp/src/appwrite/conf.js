@@ -1,4 +1,4 @@
-import { Client, Databases, Storage, Query } from "appwrite";
+import { Client, Databases, Storage, Query, ID } from "appwrite";
 import config from "../envConfig/config";
 
 export class Service{
@@ -65,6 +65,15 @@ export class Service{
     try {
       return await this.databases.getDocument(config.appwriteDbId, config.appwriteCollectionId, queries)
        
+    }
+    catch (error) {
+      throw error
+    }
+  }
+
+  async uploadFile(file){
+    try {
+      return await this.bucket.createFile(config.appwriteBucketId, ID.unique(), file)
     }
     catch (error) {
       throw error
