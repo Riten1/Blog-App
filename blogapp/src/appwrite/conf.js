@@ -12,6 +12,21 @@ export class Service{
     this.databases = new Databases(this.client)
     this.bucket = new Storage(this.client);
   }
+
+  async createPost({title, slug, content, featuredImage, status, userId}){
+    try {
+      return await this.databases.createDocument(config.appwriteDbId, config.appwriteCollectionId, ID.unique(), {
+        title,
+        slug,
+        content,
+        featuredImage, 
+        status,
+        userId
+      })
+    } catch (error) {
+      return error
+    }
+  }
 }
 
 const service = new Service()
