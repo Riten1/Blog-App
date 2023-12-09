@@ -79,6 +79,16 @@ export class Service{
       throw error
     }
   }
+
+  async deleteFile(fileId){
+    try {
+      await this.bucket.deleteFile(config.appwriteBucketId, fileId)
+      return true
+    }
+    catch (error) {
+      throw error
+    }
+  }
 }
 
 const service = new Service()
