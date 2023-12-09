@@ -89,6 +89,14 @@ export class Service{
       throw error
     }
   }
+
+  getFilePreview(fileId){
+    try {
+      return this.bucket.getFilePreview(config.appwriteBucketId, fileId)
+    } catch (error) {
+      throw error
+    }
+  }
 }
 
 const service = new Service()
