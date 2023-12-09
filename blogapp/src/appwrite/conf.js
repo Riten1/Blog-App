@@ -15,9 +15,8 @@ export class Service{
 
   async createPost({title, slug, content, featuredImage, status, userId}){
     try {
-      return await this.databases.createDocument(config.appwriteDbId, config.appwriteCollectionId, ID.unique(), {
+      return await this.databases.createDocument(config.appwriteDbId, config.appwriteCollectionId,slug, {
         title,
-        slug,
         content,
         featuredImage, 
         status,
@@ -25,6 +24,19 @@ export class Service{
       })
     } catch (error) {
       return error
+    }
+  }
+
+  async updatePost(slug, {title, content, featuredImage, status}){
+    try {
+      return await this.databases.updateDocument(conf.appwriteDbId, conf.appwriteCollectionId, slug, {
+        title,
+        content,
+        featuredImage, 
+        status,
+      })
+    } catch (error) {
+      throw error
     }
   }
 }
