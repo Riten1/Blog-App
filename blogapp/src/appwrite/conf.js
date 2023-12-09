@@ -39,6 +39,27 @@ export class Service{
       throw error
     }
   }
+
+  async deletePost(slug){
+    try {
+      await this.databases.deleteDocument(config.appwriteDbId, config.appwriteCollectionId, slug)
+      return true
+    }
+    catch (error) {
+      throw error
+      return false
+    }
+  }
+
+  async getPost(slug){
+    try {
+      return await this.databases.getDocument(config.appwriteDbId, config.appwriteCollectionId, slug)
+       
+    }
+    catch (error) {
+      throw error
+    }
+  }
 }
 
 const service = new Service()
