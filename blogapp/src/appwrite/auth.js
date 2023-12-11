@@ -1,55 +1,61 @@
 import { Client, Account, ID } from "appwrite";
 import config from "../envConfig/config";
 
-export class Authen{
-  client = new Client()
+export class Authen {
+  client = new Client();
   account;
 
-  constructor(){
-    this.client.setEndpoint(config.appwriteUrl)
-    .setProject(config.appwriteProjectId);
+  constructor() {
+    this.client
+      .setEndpoint(config.appwriteUrl)
+      .setProject(config.appwriteProjectId);
     this.account = new Account(this.client);
   }
 
-  async createAccount ({email, password, name}){
+  async createAccount({ email, password, name }) {
     try {
-      const userAccount= await this.account.create(ID.unique(), email, password, name)
-      if(userAccount){
-        return this.login({email, password})
-      }else{
-        return userAccount
+      const userAccount = await this.account.create(
+        ID.unique(),
+        email,
+        password,
+        name
+      );
+      if (userAccount) {
+        return this.login({ email, password });
+      } else {
+        return userAccount;
       }
     } catch (error) {
-      throw error
+      throw error;
     }
   }
 
-  async login({email, password}){
+  async login({ email, password }) {
     try {
       return await this.account.createEmailSession(email, password);
     } catch (error) {
-      throw error
+      throw error;
     }
   }
 
-  async getUser(){
+  async getUser() {
     try {
-      return await this.account.get()
+      return await this.account.get();
     } catch (error) {
-      throw error
+      throw error;
     }
   }
 
-  async logout(){
+  async logout() {
     try {
-      await this.account.deleteSessions()
+      await this.account.deleteSessions();
     } catch (error) {
-      throw error
+      throw error;
     }
-    return null
+    return null;
   }
 }
 
-const auth = new Authen()
+const auth = new Authen();
 
-export default auth
+export default auth;
