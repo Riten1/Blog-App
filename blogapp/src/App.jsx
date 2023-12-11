@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import auth from "./appwrite/auth";
-import {useDispatch} from '@reduxjs/toolkit'
+import { useDispatch } from "react-redux";
 import { login, logout } from "./store/authSlice";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+// import { Outlet } from "react-router-dom";
 
 function App() {
 const [loading, setLoading] = useState(true)
@@ -16,11 +19,25 @@ useEffect(() => {
     }
   }).finally(setLoading(false))
 })
-  return (
-    <>
-      <h1>hi</h1>
-    </>
-  );
+
+
+  return !loading ? (
+   
+      <div>
+    <div>
+      <Header/>
+      <main>
+        Outlet
+      </main>
+      <Footer/>
+    </div>
+     
+    </div>
+    
+  ) : null
+ 
+ 
+
 }
 
 export default App;
